@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# options
+option=$1
+
+if [[ ${option} = "ip" ]]; then
+    nova --insecure list | grep service | cut -f2 -d'=' | cut -f1 -d' ' | sort
+elif [[ ${option} = "bad" ]]; then     
+    nova --insecure list | grep -v ACTIVE
+else
+    nova --insecure list
+fi
+

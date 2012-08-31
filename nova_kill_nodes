@@ -1,0 +1,5 @@
+#!/bin/sh
+
+F=$1
+
+for n in `cat $F`; do nova --insecure delete $n; done

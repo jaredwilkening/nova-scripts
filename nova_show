@@ -1,0 +1,3 @@
+#!/bin/sh
+
+nova --insecure show $1

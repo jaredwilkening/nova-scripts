@@ -1,0 +1,24 @@
+#!/bin/sh
+
+F=$1
+
+ALIVE_COUNT=0
+ALIVE=""
+DEAD_COUNT=0
+DEAD=""
+
+for n in `cat $F`; do 
+    res=`nova --insecure delete $n 2>&1 | grep ERROR`
+    if [[ -z ${res} ]]; then
+        ALIVE_COUNT=`expr ${ALIVE_COUNT} + 1`
+        ALIVE=${ALIVE}$n"\n"
+    else
+        DEAD_COUNT=`expr ${DEAD_COUNT} + 1`
+        DEAD=${DEAD}$n"\n"
+    fi
+done
+
+echo "alive: "${ALIVE_COUNT}
+echo ${ALIVE}
+echo "dead: "${DEAD_COUNT}
+echo ${DEAD}
